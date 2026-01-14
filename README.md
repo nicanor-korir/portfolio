@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nicanor Korir - Portfolio
+
+A modern, robotics/CV-themed portfolio website built with Next.js 16, React Three Fiber, and Tailwind CSS v4.
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS v4 with custom design tokens
+- **3D Graphics**: React Three Fiber + @react-three/drei
+- **Animations**: GSAP, CSS animations
+- **Icons**: Lucide React
+- **Forms**: React Hook Form + EmailJS
+
+## Features
+
+- CV/Robotics-inspired design aesthetic
+- Interactive 3D particle system with SLAM-style grid
+- Image scanning animation with detection labels
+- Responsive layout for all screen sizes
+- Accessible (skip links, focus states, reduced motion support)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── globals.css      # Tailwind v4 theme & base styles
+│   ├── layout.tsx       # Root layout with fonts & metadata
+│   └── page.tsx         # Main page composition
+├── components/
+│   ├── 3d/              # Three.js components
+│   │   └── VisionSystem.tsx
+│   ├── layout/          # Navigation, Footer
+│   ├── sections/        # Hero, About, WorkProducts, etc.
+│   └── ui/              # Reusable UI components
+└── data/                # Projects, experience, skills data
+```
 
-## Learn More
+## Design System
 
-To learn more about Next.js, take a look at the following resources:
+### Colors
+- Primary: `#0A192F` (deep navy)
+- Accent Cyan: `#64FFDA`
+- Accent Blue: `#00D9FF`
+- Success: `#00FF88`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Typography
+- Headings: Space Grotesk
+- Body: Inter
+- Code: JetBrains Mono
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+### GitHub Pages (Automatic)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project includes a GitHub Actions workflow for automatic deployment:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push your code to the `main` branch
+2. Go to your repo **Settings → Pages**
+3. Set **Source** to "GitHub Actions"
+4. The site will deploy automatically on every push
+
+If deploying to `username.github.io/portfolio`, uncomment and update `basePath` and `assetPrefix` in `next.config.ts`.
+
+### Vercel
+
+Deploy on [Vercel](https://vercel.com) for the best Next.js experience:
+
+```bash
+npm run build
+```
+
+See [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying) for more options.
+
+## License
+
+MIT
