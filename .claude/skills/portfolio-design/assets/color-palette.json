@@ -1,0 +1,38 @@
+{
+  "colors": {
+    "background": {
+      "primary": "#0A192F",
+      "secondary": "#112240",
+      "elevated": "#1A2F4A"
+    },
+    "accent": {
+      "cyan": "#64FFDA",
+      "blue": "#00D9FF",
+      "amber": "#F76C6C"
+    },
+    "text": {
+      "primary": "#E6F1FF",
+      "secondary": "#CCD6F6",
+      "tertiary": "#8892B0"
+    },
+    "ui": {
+      "border": "#233554",
+      "grid": "#1A2840",
+      "success": "#00FF88",
+      "warning": "#FFB800"
+    }
+  },
+  "semanticNames": {
+    "deepSpace": "#0A192F",
+    "navyDepth": "#112240",
+    "electricCyan": "#64FFDA",
+    "neonBlue": "#00D9FF",
+    "warmAmber": "#F76C6C",
+    "slate": "#8892B0",
+    "lightSlate": "#CCD6F6",
+    "lightestSlate": "#E6F1FF",
+    "gridLines": "#233554",
+    "detectionGreen": "#00FF88",
+    "warningYellow": "#FFB800"
+  }
+}

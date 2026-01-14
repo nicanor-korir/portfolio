@@ -1,26 +1,294 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================
+   Portfolio Design System - Tailwind v4
+   ============================================ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors - Background */
+  --color-primary: #0A192F;
+  --color-primary-light: #112240;
+  --color-primary-lighter: #1A2F4A;
+
+  /* Colors - Accent */
+  --color-accent-cyan: #64FFDA;
+  --color-accent-blue: #00D9FF;
+  --color-accent-amber: #F76C6C;
+
+  /* Colors - Text */
+  --color-text-primary: #E6F1FF;
+  --color-text-secondary: #CCD6F6;
+  --color-text-tertiary: #8892B0;
+
+  /* Colors - UI */
+  --color-ui-border: #233554;
+  --color-ui-grid: #1A2840;
+  --color-ui-success: #00FF88;
+  --color-ui-warning: #FFB800;
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows */
+  --shadow-glow: 0 0 20px rgba(100, 255, 218, 0.3);
+  --shadow-glow-lg: 0 0 40px rgba(100, 255, 218, 0.4);
+
+  /* Animation */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Z-index scale */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   Base Styles
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-primary);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   Links & Interactive Elements
+   ============================================ */
+
+a {
+  color: var(--color-accent-cyan);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-accent-blue);
+}
+
+/* ============================================
+   Focus States (Accessibility)
+   ============================================ */
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent-cyan);
+  outline-offset: 4px;
+}
+
+/* ============================================
+   Selection
+   ============================================ */
+
+::selection {
+  background-color: var(--color-accent-cyan);
+  color: var(--color-primary);
+}
+
+/* ============================================
+   Scrollbar (Webkit)
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ui-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Skip Link (Accessibility)
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-accent-cyan);
+  color: var(--color-primary);
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  border-radius: 0 0 4px 4px;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================
+   Detection Box Animation
+   ============================================ */
+
+@keyframes drawBox {
+  0% {
+    clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%);
+  }
+  25% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+  }
+  50% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+.animate-draw-box {
+  animation: drawBox 0.8s ease-out forwards;
+}
+
+/* ============================================
+   Scan Line Animation
+   ============================================ */
+
+@keyframes scanDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-scan {
+  animation: scanDown 1.2s ease-in-out;
+}
+
+/* ============================================
+   Fade In Up Animation
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ============================================
+   Pulse Glow Animation
+   ============================================ */
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(100, 255, 218, 0.5);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* ============================================
+   Grid Background Pattern
+   ============================================ */
+
+.bg-grid {
+  background-image:
+    linear-gradient(var(--color-ui-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-ui-grid) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ============================================
+   Section Padding Utilities
+   ============================================ */
+
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
 }
