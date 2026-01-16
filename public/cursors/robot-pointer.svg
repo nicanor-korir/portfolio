@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+  <!-- Robot hand pointing -->
+  <rect x="4" y="8" width="8" height="20" rx="2" fill="#112240" stroke="#64FFDA" stroke-width="2"/>
+  <!-- Finger pointing -->
+  <rect x="6" y="2" width="4" height="8" rx="1" fill="#112240" stroke="#64FFDA" stroke-width="2"/>
+  <!-- Knuckle lines -->
+  <line x1="5" y1="12" x2="11" y2="12" stroke="#233554" stroke-width="1"/>
+  <line x1="5" y1="16" x2="11" y2="16" stroke="#233554" stroke-width="1"/>
+  <line x1="5" y1="20" x2="11" y2="20" stroke="#233554" stroke-width="1"/>
+  <!-- Glow effect on fingertip -->
+  <circle cx="8" cy="3" r="2" fill="#00D9FF" opacity="0.6"/>
+  <!-- Circuit lines -->
+  <line x1="8" y1="10" x2="8" y2="6" stroke="#00FF88" stroke-width="1" stroke-dasharray="1 1"/>
+</svg>

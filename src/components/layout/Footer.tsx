@@ -5,6 +5,8 @@ import { ArrowUp } from "lucide-react";
 export function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    // Update URL to root
+    window.history.pushState({}, "", "/");
   };
 
   return (
@@ -16,7 +18,7 @@ export function Footer() {
               Nicanor Korir © {new Date().getFullYear()}
             </p>
             <p className="text-[var(--color-text-tertiary)] text-xs mt-1">
-              Built with Next.js, Three.js, and way too much coffee
+              Built with Next.js, Three.js, lots of vibes and way too much coffee
             </p>
           </div>
 

@@ -7,8 +7,8 @@ export function Skills() {
   return (
     <Section id="skills" background="secondary">
       <SectionHeader
-        title="Technical Arsenal"
-        subtitle="The tools I use to build intelligent systems"
+        title="Technical Skills"
+        subtitle="My go to tools"
       />
 
       <div className="space-y-8">

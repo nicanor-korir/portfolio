@@ -1,30 +1,44 @@
 "use client";
 
 import { Section, SectionHeader, Button } from "@/components/ui";
-import { Coffee, Briefcase, Mail, Linkedin, Github, Twitter } from "lucide-react";
+import { Coffee, Video, Mail, Linkedin, Github } from "lucide-react";
+
+const XIcon = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    className={className}
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+);
 
 const contactLinks = [
   {
     icon: Mail,
     label: "Email",
-    value: "nicanor@example.com",
-    href: "mailto:nicanor@example.com",
+    value: "nicanor@eneza.online",
+    href: "mailto:nicanorkorir008@gmail.com",
   },
   {
     icon: Linkedin,
     label: "LinkedIn",
-    value: "/in/nicanorkorir",
+    value: "/in/nicanor-korir",
     href: "https://linkedin.com/in/nicanor-korir",
   },
   {
     icon: Github,
     label: "GitHub",
-    value: "@nicanorkorir",
+    value: "@nicanor-korir",
     href: "https://github.com/nicanor-korir",
   },
   {
-    icon: Twitter,
-    label: "Twitter",
+    icon: XIcon,
+    label: "X",
     value: "@nicanor_korir",
     href: "https://x.com/nicanor_korir",
   },
@@ -48,17 +62,18 @@ export function Contact() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
           <Button
-            href="mailto:nicanor@example.com?subject=Coffee%20in%20Berlin"
+            href="mailto:nicanorkorir008@gmail.com?subject=Grab%20virtual%20Coffee%20with%20Nicanor%20%2F%2F"
             icon={<Coffee size={18} />}
           >
-            Grab Coffee in Berlin
+            Grab coffee in Berlin
           </Button>
           <Button
             variant="secondary"
-            href="mailto:nicanor@example.com?subject=Consulting%20Inquiry"
-            icon={<Briefcase size={18} />}
+            href="https://calendar.app.google/RuRatHMCVPyYLYx2A"
+            external
+            icon={<Video size={18} />}
           >
-            Consulting Inquiries
+            Grab virtual coffee
           </Button>
         </div>
 

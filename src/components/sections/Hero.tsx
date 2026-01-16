@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button, DetectionBox } from "@/components/ui";
-import { Github, Linkedin, Coffee, Briefcase } from "lucide-react";
+import { Github, Linkedin, Coffee, Video } from "lucide-react";
 import dynamic from "next/dynamic";
 
 // Lazy load the 3D component
@@ -190,10 +190,11 @@ export function Hero() {
             </Button>
             <Button
               variant="secondary"
-              href="#contact"
-              icon={<Briefcase size={18} />}
+              href="https://calendar.app.google/RuRatHMCVPyYLYx2A"
+              external
+              icon={<Video size={18} />}
             >
-              Available for consulting
+              Grab virtual coffee
             </Button>
           </div>
         </div>

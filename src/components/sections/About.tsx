@@ -22,11 +22,11 @@ export function About() {
             label="Subject Detected"
             confidence={99}
             color="cyan"
-            className="w-full max-w-[400px]"
+            className="w-full max-w-[450px] !p-2"
           >
-            <div className="aspect-[3/4] bg-[var(--color-primary)] rounded-lg overflow-hidden relative group">
+            <div className="aspect-[3/4] bg-[var(--color-primary)] rounded overflow-hidden relative group">
               <Image
-                src="/images/headshot.jpg"
+                src="/images/nic_nao_demo.jpg"
                 alt="Nicanor Korir"
                 fill
                 className="object-cover object-top transition-transform duration-500 group-hover:scale-105"

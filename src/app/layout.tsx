@@ -111,8 +111,8 @@ export const metadata: Metadata = {
     title: siteTitle,
     description: siteDescription,
     images: ["/hero.png"],
-    creator: "@nicanorkorir",
-    site: "@nicanorkorir",
+    creator: "@nicanor_korir",
+    site: "@nicanor_korir",
   },
   robots: {
     index: true,

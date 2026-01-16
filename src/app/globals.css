@@ -48,6 +48,25 @@
 }
 
 /* ============================================
+   Custom Robot Cursor
+   ============================================ */
+
+* {
+  cursor: url('/cursors/robot-default.svg') 16 16, auto;
+}
+
+a, button, [role="button"], input[type="submit"], input[type="button"],
+.cursor-pointer, [onclick], label[for], select, summary {
+  cursor: url('/cursors/robot-pointer.svg') 8 2, pointer;
+}
+
+input[type="text"], input[type="email"], input[type="password"],
+input[type="search"], input[type="tel"], input[type="url"],
+input[type="number"], textarea {
+  cursor: url('/cursors/robot-default.svg') 16 16, text;
+}
+
+/* ============================================
    Base Styles
    ============================================ */
 
