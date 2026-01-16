@@ -284,11 +284,11 @@ Logo/Name (left) | About | Work | Research | Contact (right)
 ```markdown
 ## About
 
-I architect AI systems that solve real problems — from helping survivors of gender-based violence navigate complex support systems in Germany (addressing an €8-11 billion annual productivity loss), to enabling farmers to detect crop diseases through computer vision.
+I architect AI systems that solve real problems ,  from helping survivors of gender-based violence navigate complex support systems in Germany (addressing an €8-11 billion annual productivity loss), to enabling farmers to detect crop diseases through computer vision.
 
 My journey spans Nairobi to Berlin, warehouse robotics to trauma-informed AI, full-stack engineering to cutting-edge research. Seven years building scalable cloud solutions. Currently pursuing my MSc in AI & Robotics while leading technical strategy at Alma, consulting on computer vision systems at Faro, and researching Vision-Language-Action models that bridge perception and manipulation.
 
-I'm driven by a singular question: **How can we deploy AI and robotics to create genuine, measurable impact at scale?** Whether it's saving $1M in infrastructure costs, increasing warehouse throughput by 40%, or giving voice to survivors who've been systematically silenced — I build technology that moves the needle on problems that matter.
+I'm driven by a singular question: **How can we deploy AI and robotics to create genuine, measurable impact at scale?** Whether it's saving $1M in infrastructure costs, increasing warehouse throughput by 40%, or giving voice to survivors who've been systematically silenced ,  I build technology that moves the needle on problems that matter.
 
 When I'm not coding or researching, I'm exploring how robotics can transform agriculture in emerging markets, mentoring early-stage founders, and shipping micro-SaaS products that validate ideas fast.
 ```
@@ -311,7 +311,7 @@ When I'm not coding or researching, I'm exploring how robotics can transform agr
 
 ---
 
-### SECTION 3: Work — Companies & Products
+### SECTION 3: Work ,  Companies & Products
 
 **Background:** Dark with subtle particle field
 
@@ -360,7 +360,7 @@ visual_style: "Warm amber accents, empathetic design"
 #### 2. Eneza - Social Media Content Creation
 ```yaml
 tagline: "Micro-SaaS for creators who ship fast"
-description: "AI-powered content pipeline that transforms ideas into platform-ready social media posts. Built for speed and validation — from concept to first paying users in 3 weeks. Evolved from Shoman Nexus into focused, revenue-generating product."
+description: "AI-powered content pipeline that transforms ideas into platform-ready social media posts. Built for speed and validation ,  from concept to first paying users in 3 weeks. Evolved from Shoman Nexus into focused, revenue-generating product."
 impact: "Launch to revenue in 3 weeks | Validated micro-SaaS model"
 tech: [Next.js, OpenAI API, TailwindCSS, Stripe, Vercel]
 status: "Live & Growing"
@@ -418,7 +418,7 @@ visual_style: "Technical, blue-focused"
 
 ---
 
-### SECTION 4: Work — Professional Impact
+### SECTION 4: Work ,  Professional Impact
 
 **Section Header:**
 ```
@@ -451,7 +451,7 @@ Building systems that scale, saving millions, moving metrics
 ```
 Transformed warehouse operations through computer vision:
 
-→ Designed custom AI garment categorization engine (type, size, color) integrated directly into Faro's warehouse workflow — accelerating sorting throughput and improving cataloging accuracy by 35%
+→ Designed custom AI garment categorization engine (type, size, color) integrated directly into Faro's warehouse workflow ,  accelerating sorting throughput and improving cataloging accuracy by 35%
 
 → Led development of AI-assisted image capture + barcode scanning solution that automatically identifies and classifies garments during intake, supporting faster stock management across retail supply chain
 
@@ -465,11 +465,11 @@ Tech: Python, TensorFlow, OpenCV, FastAPI, AWS, Computer Vision Pipelines
 ```
 Architected energy and logistics platforms at scale:
 
-→ Led design and implementation of modular energy platform through cross-functional collaboration — achieving 20% reduction in client power consumption while streamlining operational efficiency
+→ Led design and implementation of modular energy platform through cross-functional collaboration ,  achieving 20% reduction in client power consumption while streamlining operational efficiency
 
 → Developed end-to-end cloud-based logistics microservices architecture, reducing infrastructure costs by 15% through efficient resource allocation and containerization
 
-→ Aligned stakeholders via interactive workshops, refining requirements to resolve critical deployment blockers — increasing deployment velocity by 20%
+→ Aligned stakeholders via interactive workshops, refining requirements to resolve critical deployment blockers ,  increasing deployment velocity by 20%
 
 Tech: Node.js, React, AWS, Kubernetes, Microservices, Docker, PostgreSQL
 ```
@@ -479,11 +479,11 @@ Tech: Node.js, React, AWS, Kubernetes, Microservices, Docker, PostgreSQL
 ```
 Engineered cloud solutions that drove measurable ROI:
 
-→ Built innovative cloud-based web solutions with Python and React.js yielding 30% increase in operational efficiency — directly contributing to $1M annual savings through streamlined processes
+→ Built innovative cloud-based web solutions with Python and React.js yielding 30% increase in operational efficiency ,  directly contributing to $1M annual savings through streamlined processes
 
 → Led requirements gathering for 180+ features through cross-functional discussions, ensuring development aligned with client demands and company priorities
 
-→ Designed high-performing UI component library leveraging React.js reusable patterns — reducing personal coding workload by 8 hours weekly while improving responsiveness across platforms
+→ Designed high-performing UI component library leveraging React.js reusable patterns ,  reducing personal coding workload by 8 hours weekly while improving responsiveness across platforms
 
 Tech: Python, Django, React.js, AWS, GCP, REST APIs
 ```
@@ -495,7 +495,7 @@ Drove productivity and sales through innovative solutions:
 
 → Pioneered system optimizations through analysis of existing infrastructure, resulting in 15% productivity increase
 
-→ Developed high-impact web applications using Django and JavaScript serving 50+ B2B clients — driving 40% increase in sales
+→ Developed high-impact web applications using Django and JavaScript serving 50+ B2B clients ,  driving 40% increase in sales
 
 Tech: Django, JavaScript, PostgreSQL, Payment Systems
 ```
@@ -505,7 +505,7 @@ Tech: Django, JavaScript, PostgreSQL, Payment Systems
 ```
 Built tools that moved metrics:
 
-→ Developed efficient data processing algorithms for interactive maps and analytics solutions — 30% performance increase, 95% client satisfaction rate
+→ Developed efficient data processing algorithms for interactive maps and analytics solutions ,  30% performance increase, 95% client satisfaction rate
 
 → Architected internal meal planning tool using Node.js and React, streamlining serving plans and driving 32% increase in employee productivity
 
@@ -542,7 +542,7 @@ Tech: Government Systems, Code Quality, Cross-functional Collaboration
 **Section Header:**
 ```
 ## Research & Robotics
-Where theory meets titanium — building the future of intelligent machines
+Where theory meets titanium ,  building the future of intelligent machines
 ```
 
 **Layout:** Feature-rich cards with technical depth
@@ -800,7 +800,7 @@ and deploying AI in sensitive contexts.
 │          ──────────────────────             │
 │                                             │
 │  I'm always open to interesting             │
-│  conversations — whether it's grabbing      │
+│  conversations ,  whether it's grabbing      │
 │  coffee in Berlin, exploring consulting     │
 │  opportunities, or discussing the future    │
 │  of AI and robotics.                        │
@@ -1198,13 +1198,13 @@ Vercel
 ### Key Messages
 
 **Core Positioning:**
-"I bridge cutting-edge AI research with products that solve real problems — from trauma-informed systems in Berlin to agricultural robotics in Kenya."
+"I bridge cutting-edge AI research with products that solve real problems ,  from trauma-informed systems in Berlin to agricultural robotics in Kenya."
 
 **For Employers/Companies:**
 "7+ years building scalable systems, proven track record of driving measurable impact ($1M+ savings, 40% efficiency gains), currently mastering the intersection of AI and robotics."
 
 **For Investors/Partners:**
-"Technical co-founder who ships — leading Alma's AI strategy, validated micro-SaaS builder, researcher with production-grade engineering skills."
+"Technical co-founder who ships ,  leading Alma's AI strategy, validated micro-SaaS builder, researcher with production-grade engineering skills."
 
 **For Consulting Clients:**
 "Computer vision and AI systems architect with deployment experience across warehouses, retail, and sensitive applications. I build production-ready solutions, not prototypes."

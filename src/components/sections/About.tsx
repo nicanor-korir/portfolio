@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Section, SectionHeader, DetectionBox } from "@/components/ui";
 
 const stats = [
@@ -23,20 +24,17 @@ export function About() {
             color="cyan"
             className="w-full max-w-[400px]"
           >
-            <div className="aspect-square bg-[var(--color-primary)] rounded-lg overflow-hidden">
-              {/* Placeholder for actual photo */}
-              <div className="w-full h-full flex items-center justify-center text-[var(--color-text-tertiary)]">
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-[var(--color-primary-lighter)] flex items-center justify-center">
-                    <span className="text-4xl font-[family-name:var(--font-heading)] text-[var(--color-accent-cyan)]">
-                      NK
-                    </span>
-                  </div>
-                  <p className="text-sm font-[family-name:var(--font-mono)]">
-                    [Photo placeholder]
-                  </p>
-                </div>
-              </div>
+            <div className="aspect-[3/4] bg-[var(--color-primary)] rounded-lg overflow-hidden relative group">
+              <Image
+                src="/images/headshot.jpg"
+                alt="Nicanor Korir"
+                fill
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 400px"
+                priority
+              />
+              {/* Subtle overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           </DetectionBox>
         </div>
@@ -44,7 +42,7 @@ export function About() {
         {/* Text content */}
         <div className="space-y-6">
           <p className="text-lg text-[var(--color-text-secondary)]">
-            I architect AI systems that solve real problems — from helping
+            I architect AI systems that solve real problems ,  from helping
             survivors of gender-based violence navigate complex support systems
             in Germany{" "}
             <span className="text-[var(--color-accent-cyan)]">
@@ -75,7 +73,7 @@ export function About() {
             </span>{" "}
             Whether it&apos;s saving $1M in infrastructure costs, increasing
             warehouse throughput by 40%, or giving voice to survivors who&apos;ve
-            been systematically silenced — I build technology that moves the
+            been systematically silenced ,  I build technology that moves the
             needle on problems that matter.
           </p>
 

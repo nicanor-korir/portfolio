@@ -112,7 +112,7 @@ Shipping: Eneza + micro-SaaS experiments
 
 **Example Opening:**
 ```
-I architect AI systems that solve real problems — from helping survivors
+I architect AI systems that solve real problems ,  from helping survivors
 of gender-based violence navigate complex support systems in Germany
 (addressing an €8-11 billion annual productivity loss), to enabling
 farmers to detect crop diseases through computer vision.
@@ -194,9 +194,9 @@ Tech: [Relevant stack]
 - "Developed various features"
 
 **Good:**
-- "Architected modular energy platform — 20% reduction in power consumption"
-- "Built cloud logistics microservices — 15% infrastructure cost savings"
-- "Designed UI component library — 8 hours weekly coding time saved"
+- "Architected modular energy platform ,  20% reduction in power consumption"
+- "Built cloud logistics microservices ,  15% infrastructure cost savings"
+- "Designed UI component library ,  8 hours weekly coding time saved"
 
 **Rules for Impact Statements:**
 1. Start with strong verb (Architected, Built, Designed)
@@ -251,7 +251,7 @@ Status: MSc Dissertation (2025-2026)
 ```
 Let's Build Something
 
-I'm always open to interesting conversations — whether it's grabbing
+I'm always open to interesting conversations ,  whether it's grabbing
 coffee in Berlin, exploring consulting opportunities, or discussing
 the future of AI and robotics.
 
@@ -357,7 +357,7 @@ Or reach out directly:
 
 ### Too Vague
 - "Improved system performance"
-+ "Optimized data processing algorithms — 30% performance increase"
++ "Optimized data processing algorithms ,  30% performance increase"
 
 ### Too Technical
 - "Implemented BERT-based transformer architecture with multi-head attention mechanisms for NER tasks"
@@ -365,7 +365,7 @@ Or reach out directly:
 
 ### Too Humble
 - "Helped contribute to the team's success"
-+ "Led development of [X] — achieving [Y]"
++ "Led development of [X] ,  achieving [Y]"
 
 ### Too Aggressive
 - "Revolutionized the industry with groundbreaking AI"
@@ -387,7 +387,7 @@ Or reach out directly:
 ### Body Text
 - Paragraphs: 2-4 sentences max
 - Line breaks for readability
-- Em dashes (—) for emphasis, not hyphens (-)
+- Em dashes (, ) for emphasis, not hyphens (-)
 
 ### Lists
 - Bullet points for unordered items

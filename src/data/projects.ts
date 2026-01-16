@@ -29,7 +29,7 @@ export const projects: Project[] = [
     title: "Eneza",
     tagline: "Micro-SaaS for creators who ship fast",
     description:
-      "AI-powered content pipeline that transforms ideas into platform-ready social media posts. Built for speed and validation — from concept to first paying users in 3 weeks. Evolved from Shoman Nexus into focused, revenue-generating product.",
+      "AI-powered content pipeline that transforms ideas into platform-ready social media posts. Built for speed and validation ,  from concept to first paying users in 3 weeks. Evolved from Shoman Nexus into focused, revenue-generating product.",
     impact: "Launch to revenue in 3 weeks | Validated micro-SaaS model",
     tech: ["Next.js", "OpenAI API", "TailwindCSS", "Stripe", "Vercel"],
     status: "Live",

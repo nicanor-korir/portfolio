@@ -1,7 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Button, DetectionBox } from "@/components/ui";
-import { Github, Linkedin, Twitter, Mail, Coffee, Briefcase } from "lucide-react";
+import { Github, Linkedin, Coffee, Briefcase } from "lucide-react";
 import dynamic from "next/dynamic";
 
 // Lazy load the 3D component
@@ -16,11 +17,23 @@ const VisionSystem = dynamic(() => import("@/components/3d/VisionSystem"), {
   ),
 });
 
+const XIcon = ({ size = 24 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+);
+
 const socialLinks = [
   { icon: Github, href: "https://github.com/nicanor-korir", label: "GitHub" },
   { icon: Linkedin, href: "https://linkedin.com/in/nicanor-korir", label: "LinkedIn" },
-  { icon: Twitter, href: "https://x.com/nicanor_korir", label: "Twitter" },
-  { icon: Mail, href: "mailto:nicanor@example.com", label: "Email" },
+  { icon: XIcon, href: "https://x.com/nicanor_korir", label: "X" }
 ];
 
 const focusItems = [
@@ -32,16 +45,68 @@ const focusItems = [
   {
     status: "blue",
     label: "Researching",
-    text: "Vision-Language-Action models for robotics",
+    text: "Vision-Language-Action models",
   },
   {
     status: "green",
     label: "Shipping",
-    text: "Eneza + micro-SaaS experiments",
+    text: "Eneza + SaaS experiments",
   },
 ];
 
+// Scroll indicator messages
+const scrollMessages = [
+  "Scroll to explore",
+  "Who is Nicanor Korir? 🤔",
+  "Go forth and explore 🚀",
+];
+
 export function Hero() {
+  const [scrollState, setScrollState] = useState<"visible" | "scrolling" | "farewell" | "hidden">("visible");
+  const [messageIndex, setMessageIndex] = useState(0);
+
+  useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const heroHeight = window.innerHeight;
+
+      // User is at the top of the page (in hero section)
+      if (currentScrollY < 50) {
+        setScrollState("visible");
+        setMessageIndex(0);
+      }
+      // User started scrolling but still in hero area
+      else if (currentScrollY < heroHeight * 0.3) {
+        setScrollState("scrolling");
+        setMessageIndex(1);
+      }
+      // User scrolled past 30% of hero
+      else if (currentScrollY < heroHeight * 0.6) {
+        setScrollState("farewell");
+        setMessageIndex(2);
+        // Hide after showing farewell message
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          if (window.scrollY >= heroHeight * 0.5) {
+            setScrollState("hidden");
+          }
+        }, 1500);
+      }
+      // User scrolled past hero
+      else {
+        setScrollState("hidden");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-12 py-20">
       {/* Background grid */}
@@ -65,27 +130,28 @@ export function Hero() {
           </DetectionBox>
 
           <p className="text-xl md:text-2xl text-[var(--color-text-secondary)] mb-8">
-            <span className="text-[var(--color-accent-cyan)]">CTO & Co-Founder</span> at Alma |{" "}
-            <span className="text-[var(--color-text-primary)]">AI/Robotics Engineer</span>
+            <span className="text-[var(--color-accent-cyan)]">CTO</span> at Alma |{" "}
+            <span className="text-[var(--color-text-primary)]">AI/Robotics Engineer</span>{" "}|{" "}
+            <span className="text-[var(--color-text-primary)]">Freelancer</span>
           </p>
 
           {/* Focus items */}
-          <div className="space-y-3 mb-10">
+          <div className="space-y-1.5 sm:space-y-2 mb-8 sm:mb-10 text-left max-w-md mx-auto lg:mx-0">
             {focusItems.map((item, index) => (
               <div
                 key={index}
-                className="flex items-start gap-3 justify-center lg:justify-start"
+                className="flex items-center gap-2 sm:gap-3"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 <span
                   className={`
-                    w-2 h-2 rounded-full mt-2 shrink-0
+                    w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shrink-0
                     ${item.status === "red" ? "bg-[var(--color-accent-amber)]" : ""}
                     ${item.status === "blue" ? "bg-[var(--color-accent-blue)]" : ""}
                     ${item.status === "green" ? "bg-[var(--color-ui-success)]" : ""}
                   `}
                 />
-                <p className="text-[var(--color-text-secondary)]">
+                <p className="text-sm sm:text-base text-[var(--color-text-secondary)] leading-snug">
                   <span className="text-[var(--color-text-primary)] font-medium">
                     {item.label}:
                   </span>{" "}
@@ -132,12 +198,33 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--color-text-tertiary)]">
-          <span className="text-sm font-[family-name:var(--font-mono)]">
-            Scroll to explore
+        {/* Scroll indicator - hidden on mobile, changes based on scroll */}
+        <div
+          className={`
+            absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2
+            transition-all duration-500 ease-out
+            ${scrollState === "hidden" ? "opacity-0 translate-y-4 pointer-events-none" : "opacity-100 translate-y-0"}
+            ${scrollState === "farewell" ? "text-[var(--color-accent-cyan)]" : "text-[var(--color-text-tertiary)]"}
+          `}
+        >
+          <span
+            className={`
+              text-sm font-[family-name:var(--font-mono)]
+              transition-all duration-300
+              ${scrollState === "farewell" ? "scale-105" : "scale-100"}
+            `}
+          >
+            {scrollMessages[messageIndex]}
           </span>
-          <div className="w-px h-8 bg-gradient-to-b from-[var(--color-accent-cyan)] to-transparent animate-pulse" />
+          <div
+            className={`
+              w-px h-8 bg-gradient-to-b from-[var(--color-accent-cyan)] to-transparent
+              transition-all duration-300
+              ${scrollState === "visible" ? "animate-pulse" : ""}
+              ${scrollState === "scrolling" ? "h-12 opacity-70" : ""}
+              ${scrollState === "farewell" ? "h-4 opacity-50" : ""}
+            `}
+          />
         </div>
       </div>
     </section>

@@ -1,10 +1,59 @@
 "use client";
 
-import { useRef, useMemo, useState, useEffect } from "react";
+import { useRef, useMemo, useState, useEffect, useCallback } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Line } from "@react-three/drei";
 import * as THREE from "three";
 import Image from "next/image";
+
+// Cyber text typing effect component
+function CyberText({ text, className }: { text: string; className?: string }) {
+  const [displayText, setDisplayText] = useState("");
+  const [isGlitching, setIsGlitching] = useState(false);
+  const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?0123456789ABCDEF";
+
+  const getRandomChar = useCallback(() => chars[Math.floor(Math.random() * chars.length)], []);
+
+  useEffect(() => {
+    let currentIndex = 0;
+    let glitchCount = 0;
+
+    const typeInterval = setInterval(() => {
+      if (currentIndex <= text.length) {
+        // Add glitch effect during typing
+        if (glitchCount < 2) {
+          setDisplayText(
+            text.slice(0, currentIndex) +
+            getRandomChar() +
+            getRandomChar()
+          );
+          glitchCount++;
+        } else {
+          setDisplayText(text.slice(0, currentIndex));
+          currentIndex++;
+          glitchCount = 0;
+        }
+      } else {
+        clearInterval(typeInterval);
+        // Occasional glitch after complete
+        const glitchInterval = setInterval(() => {
+          setIsGlitching(true);
+          setTimeout(() => setIsGlitching(false), 100);
+        }, 3000);
+        return () => clearInterval(glitchInterval);
+      }
+    }, 50);
+
+    return () => clearInterval(typeInterval);
+  }, [text, getRandomChar]);
+
+  return (
+    <span className={`${className} ${isGlitching ? 'opacity-70' : ''}`}>
+      {displayText}
+      <span className="animate-pulse">_</span>
+    </span>
+  );
+}
 
 function ParticleField() {
   const ref = useRef<THREE.Points>(null);
@@ -50,19 +99,21 @@ function Grid() {
   );
 }
 
-function ScanLine() {
+function ScanLine({ isActive }: { isActive: boolean }) {
   const ref = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
-    if (ref.current) {
+    if (ref.current && isActive) {
       // Oscillate scan line up and down
       ref.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 3;
     }
   });
 
+  if (!isActive) return null;
+
   return (
     <mesh ref={ref} position={[0, 0, 0]}>
-      <planeGeometry args={[15, 0.02]} />
+      <planeGeometry args={[7, 0.05]} />
       <meshBasicMaterial color="#00D9FF" transparent opacity={0.6} />
     </mesh>
   );
@@ -124,9 +175,9 @@ function DetectionFrame() {
 
 // Detection labels data
 const detectionLabels = [
-  { label: "SUBJECT", confidence: 99, delay: 0 },
-  { label: "ENGINEER", confidence: 97, delay: 200 },
-  { label: "ROBOTICIST", confidence: 95, delay: 400 },
+  { label: "HUMAN", confidence: 99.97, delay: 0 },
+  { label: "ENGINEER", confidence: 85, delay: 450 },
+  { label: "NICANOR", confidence: 89.02, delay: 900 },
 ];
 
 export default function VisionSystem() {
@@ -149,25 +200,38 @@ export default function VisionSystem() {
   }, []);
 
   return (
-    <div className="w-full h-[300px] md:h-[400px] relative">
+    <div className="w-full h-[50vh] sm:h-[420px] md:h-[500px] relative overflow-hidden">
       {/* Status overlay */}
-      <div className="absolute top-4 left-4 z-10 font-[family-name:var(--font-mono)] text-xs">
-        <div className="flex items-center gap-2 text-[var(--color-ui-success)]">
-          <span className="w-2 h-2 rounded-full bg-[var(--color-ui-success)] animate-pulse" />
+      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 font-[family-name:var(--font-mono)] text-[10px] sm:text-xs">
+        <div className="flex items-center gap-1.5 sm:gap-2 text-[var(--color-ui-success)]">
+          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[var(--color-ui-success)] animate-pulse" />
           <span>VISION_SYSTEM_ACTIVE</span>
         </div>
-        <div className="text-[var(--color-text-tertiary)] mt-1">
-          {detectionComplete ? "Subject identified" : "Scanning subject..."}
+        <div className="mt-0.5 sm:mt-1">
+          {detectionComplete ? (
+            <div className="space-y-0.5">
+              <CyberText
+                text="HUMAN DETECTED"
+                className="text-[var(--color-accent-cyan)] block"
+              />
+              <CyberText
+                text="THREAT LEVEL: ZERO"
+                className="text-[var(--color-ui-success)] block"
+              />
+            </div>
+          ) : (
+            <span className="text-[var(--color-text-tertiary)]">Scanning...</span>
+          )}
         </div>
       </div>
 
       {/* Detection info overlay */}
-      <div className="absolute top-4 right-4 z-10 font-[family-name:var(--font-mono)] text-xs text-right">
+      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 font-[family-name:var(--font-mono)] text-[10px] sm:text-xs text-right">
         <div className="text-[var(--color-accent-blue)]">
           {detectionComplete ? "DETECTION: COMPLETE" : `SCAN: ${scanProgress}%`}
         </div>
         <div className="text-[var(--color-text-tertiary)]">
-          {detectionComplete ? "3 OBJECTS FOUND" : "ANALYZING..."}
+          {detectionComplete ? "SUBJECT IDENTIFIED" : "ANALYZING..."}
         </div>
       </div>
 
@@ -181,13 +245,13 @@ export default function VisionSystem() {
         <ambientLight intensity={0.5} />
         <ParticleField />
         <Grid />
-        <ScanLine />
+        <ScanLine isActive={!detectionComplete} />
         <DetectionFrame />
       </Canvas>
 
       {/* Image overlay with CV-style scan effect - positioned in center of canvas */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-        <div className="relative w-[180px] h-[180px] md:w-[220px] md:h-[220px]">
+        <div className="relative w-[310px] h-[310px] md:w-[270px] md:h-[280px]">
 
           {/* Scan line - FRONT (z-30) - glowing line that paints the image */}
           {!detectionComplete && (
@@ -226,11 +290,12 @@ export default function VisionSystem() {
             }}
           >
             <Image
-              src="/images/headshot.jpg"
+              src="/images/nic-robot.jpg"
               alt="Nicanor Korir"
               fill
               className="object-cover"
               style={{
+                objectPosition: 'center 25%',
                 filter: detectionComplete
                   ? 'grayscale(0) brightness(1)'
                   : `grayscale(${1 - scanProgress / 100}) brightness(${0.7 + (scanProgress / 100) * 0.3})`,
@@ -279,29 +344,59 @@ export default function VisionSystem() {
             </div>
           )}
 
-          {/* Corner brackets overlay */}
-          <div className="absolute inset-[-4px] pointer-events-none z-20">
-            <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[var(--color-accent-cyan)]" />
-            <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[var(--color-accent-cyan)]" />
-            <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-[var(--color-accent-cyan)]" />
-            <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[var(--color-accent-cyan)]" />
-          </div>
-
           {/* Scanning indicator dots at corners */}
           {!detectionComplete && (
             <>
-              <div className="absolute -top-1 -left-1 w-2 h-2 bg-[var(--color-accent-cyan)] rounded-full animate-pulse z-20" />
-              <div className="absolute -top-1 -right-1 w-2 h-2 bg-[var(--color-accent-cyan)] rounded-full animate-pulse z-20" style={{ animationDelay: '0.2s' }} />
-              <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-[var(--color-ui-success)] rounded-full animate-pulse z-20" style={{ animationDelay: '0.4s' }} />
-              <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-[var(--color-ui-success)] rounded-full animate-pulse z-20" style={{ animationDelay: '0.6s' }} />
+              <div className="absolute -top-0.5 -left-0.5 sm:-top-1 sm:-left-1 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[var(--color-accent-cyan)] rounded-full animate-pulse z-20" />
+              <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[var(--color-accent-cyan)] rounded-full animate-pulse z-20" style={{ animationDelay: '0.2s' }} />
+              <div className="absolute -bottom-0.5 -left-0.5 sm:-bottom-1 sm:-left-1 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[var(--color-ui-success)] rounded-full animate-pulse z-20" style={{ animationDelay: '0.4s' }} />
+              <div className="absolute -bottom-0.5 -right-0.5 sm:-bottom-1 sm:-right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[var(--color-ui-success)] rounded-full animate-pulse z-20" style={{ animationDelay: '0.6s' }} />
             </>
           )}
         </div>
       </div>
 
-      {/* Detection labels that appear after scan completes */}
+      {/* Bottom overlay with coordinates */}
+      <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-10 font-[family-name:var(--font-mono)] text-[10px] sm:text-xs text-[var(--color-text-tertiary)]">
+        <div>
+          X: <span className={detectionComplete ? "text-[var(--color-ui-success)]" : ""}>{(Math.sin(scanProgress * 0.1) * 0.5).toFixed(3)}</span>
+        </div>
+        <div>
+          Y: <span className={detectionComplete ? "text-[var(--color-ui-success)]" : ""}>{((scanProgress / 100) * 2 - 1).toFixed(3)}</span>
+        </div>
+        <div>
+          Z: <span className={detectionComplete ? "text-[var(--color-ui-success)]" : ""}>{(8 - (scanProgress / 100) * 2).toFixed(3)}</span>
+        </div>
+        {detectionComplete && (
+          <div className="text-[var(--color-ui-success)] mt-1 animate-fade-in">TARGET_LOCKED</div>
+        )}
+      </div>
+
+      {/* Cheesy description on the right - appears after scan */}
       {detectionComplete && (
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 font-[family-name:var(--font-mono)] text-[10px] sm:text-xs text-right animate-fade-in max-w-[140px] sm:max-w-[180px]">
+          <div className="text-[var(--color-accent-cyan)]">ACTIVITY:</div>
+          <div className="text-[var(--color-text-secondary)] leading-tight mt-0.5">
+            Nicanor teaching NAO robot to wave
+          </div>
+        </div>
+      )}
+
+      {/* Progress bar at bottom */}
+      {!detectionComplete && (
+        <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 w-24 sm:w-32">
+          <div className="h-1 bg-[var(--color-ui-border)] rounded-full overflow-hidden">
+            <div
+              className="h-full bg-[var(--color-accent-cyan)] transition-all duration-100"
+              style={{ width: `${scanProgress}%` }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Detection labels that appear after scan completes - desktop only */}
+      {detectionComplete && (
+        <div className="absolute inset-0 pointer-events-none hidden sm:block">
           {detectionLabels.map((det, i) => (
             <div
               key={det.label}
@@ -319,34 +414,6 @@ export default function VisionSystem() {
               </div>
             </div>
           ))}
-        </div>
-      )}
-
-      {/* Bottom overlay with coordinates - animates during scan */}
-      <div className="absolute bottom-4 left-4 z-10 font-[family-name:var(--font-mono)] text-xs text-[var(--color-text-tertiary)]">
-        <div>
-          X: <span className={detectionComplete ? "text-[var(--color-ui-success)]" : ""}>{(Math.sin(scanProgress * 0.1) * 0.5).toFixed(3)}</span>
-        </div>
-        <div>
-          Y: <span className={detectionComplete ? "text-[var(--color-ui-success)]" : ""}>{((scanProgress / 100) * 2 - 1).toFixed(3)}</span>
-        </div>
-        <div>
-          Z: <span className={detectionComplete ? "text-[var(--color-ui-success)]" : ""}>{(8 - (scanProgress / 100) * 2).toFixed(3)}</span>
-        </div>
-        {detectionComplete && (
-          <div className="text-[var(--color-ui-success)] mt-1 animate-fade-in">TARGET_LOCKED</div>
-        )}
-      </div>
-
-      {/* Progress bar at bottom */}
-      {!detectionComplete && (
-        <div className="absolute bottom-4 right-4 z-10 w-32">
-          <div className="h-1 bg-[var(--color-ui-border)] rounded-full overflow-hidden">
-            <div
-              className="h-full bg-[var(--color-accent-cyan)] transition-all duration-100"
-              style={{ width: `${scanProgress}%` }}
-            />
-          </div>
         </div>
       )}
     </div>

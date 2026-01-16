@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -42,9 +43,16 @@ export function Navigation() {
         {/* Logo */}
         <Link
           href="/"
-          className="text-[var(--color-text-primary)] font-[family-name:var(--font-heading)] font-bold text-xl hover:text-[var(--color-accent-cyan)] transition-colors"
+          className="hover:opacity-80 transition-opacity"
         >
-          NK
+          <Image
+            src="/logo.png"
+            alt="Nicanor Korir"
+            width={40}
+            height={40}
+            className="w-10 h-10 object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}

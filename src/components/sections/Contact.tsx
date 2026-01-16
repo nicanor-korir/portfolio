@@ -40,7 +40,7 @@ export function Contact() {
         />
 
         <p className="text-lg text-[var(--color-text-secondary)] mb-10">
-          I&apos;m always open to interesting conversations — whether it&apos;s
+          I&apos;m always open to interesting conversations ,  whether it&apos;s
           grabbing coffee in Berlin, exploring consulting opportunities, or
           discussing the future of AI and robotics.
         </p>

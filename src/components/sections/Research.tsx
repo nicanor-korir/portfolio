@@ -9,7 +9,7 @@ export function Research() {
     <Section id="research" background="primary" withGrid>
       <SectionHeader
         title="Research & Robotics"
-        subtitle="Where theory meets titanium — building the future of intelligent machines"
+        subtitle="Where theory meets titanium ,  building the future of intelligent machines"
       />
 
       {/* Current Research Focus */}
